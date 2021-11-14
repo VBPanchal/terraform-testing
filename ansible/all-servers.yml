@@ -1,0 +1,42 @@
+---
+- name: Init Servers
+  hosts: all
+  become: true
+  tasks:
+  - name: Install Basic server toolset
+    apt: 
+      name: 
+      - ca-certificates
+      - docker.io
+      - python-pip
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+      - curl
+      state: latest
+      update_cache: yes
+
+  - name: Ensure group "docker" exists with correct gid
+    ansible.builtin.group:
+      name: docker
+      state: present
+      gid: 1750
+
+  - name: create a docker user
+    ansible.builtin.user:
+      name: docker
+      groups: docker
+      append: yes
+
+  - name: adding existing user to docker group
+    ansible.builtin.user:
+      name: ubuntu
+      groups: docker
+      append: yes
+
+  - name: Change ownership to docker:docker on docker.sock
+    ansible.builtin.file:
+      path: /var/run/docker.sock
+      owner: docker
+      group: docker
+      mode: '0660'

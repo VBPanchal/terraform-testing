@@ -24,8 +24,11 @@ resource "aws_instance" "app_server" {
   user_data = <<-EOF
 #!/bin/bash
 apt update
+apt install software-properties-common
+add-apt-repository --yes --update ppa:ansible/ansible
 apt install ansible -y
 hostnamectl set-hostname node${count.index + 1}
+sh -c 'echo "$(hostname -I) $(hostname)" >> /etc/hosts'
   EOF
   tags = {
     Name = "node${count.index + 1}"

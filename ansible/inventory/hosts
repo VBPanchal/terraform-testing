@@ -1,0 +1,2 @@
+[nodes]
+node1 ansible_user=ubuntu ansible_host=52.27.186.142

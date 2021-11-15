@@ -3,16 +3,16 @@
   hosts: all
   become: true
   tasks:
+
   - name: Install Basic server toolset
     apt: 
       name: 
       - ca-certificates
+      - curl
       - docker.io
-      - python-pip
       - python3-pip
       - virtualenv
       - python3-setuptools
-      - curl
       state: latest
       update_cache: yes
 
@@ -40,3 +40,15 @@
       owner: docker
       group: docker
       mode: '0660'
+
+
+  - name: Make sure pip is the latest version
+    pip:
+      name: pip
+      state: forcereinstall
+      
+
+  - name: Install latest version of flask python package
+    pip:
+      name: flask
+      state: latest

@@ -28,7 +28,9 @@ apt install software-properties-common
 add-apt-repository --yes --update ppa:ansible/ansible
 apt install ansible -y
 hostnamectl set-hostname node${count.index + 1}
-sh -c 'echo "$(hostname -I) $(hostname)" >> /etc/hosts'
+echo "$(hostname -I) $(hostname)" >> /etc/hosts
+git clone https://github.com/devopsjourney1/terraform-testing /home/ubuntu/devops
+
   EOF
   tags = {
     Name = "node${count.index + 1}"

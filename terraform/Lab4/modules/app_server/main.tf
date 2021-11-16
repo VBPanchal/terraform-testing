@@ -30,6 +30,7 @@ apt install ansible -y
 hostnamectl set-hostname node${count.index + 1}
 echo "$(hostname -I) $(hostname)" >> /etc/hosts
 git clone https://github.com/devopsjourney1/terraform-testing /home/ubuntu/devops
+chown -R ubuntu:ubuntu devops
   EOF
   tags = {
     Name = "node${count.index + 1}"

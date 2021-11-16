@@ -12,5 +12,5 @@ ansible-playbook -i ../inventories/hosts -K install-jenkins.yml
 
 ansible-playbook all-servers.yml -i inventory/localhost
 
-
+sudo flask run --host=0.0.0.0 --port=80
 # ansible-inventory -i hosts --graph  (only works macos maybe linux not wsl)

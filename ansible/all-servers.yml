@@ -42,13 +42,21 @@
       mode: '0660'
 
 
-  - name: Make sure pip is the latest version
-    pip:
-      name: pip
-      state: forcereinstall
-      
 
-  - name: Install latest version of flask python package
-    pip:
-      name: flask
-      state: latest
+
+# not required anymore. will manually install, then move it to docker
+# funny because this part was the biggest pain, and docker will completely solve the problem.
+# once we get it working.. put in another dependancy, and show that it breaks
+# sudo flask run --host=0.0.0.0 --port=80
+#  - name: Make sure pip is the latest version
+#    pip:
+#      name: pip
+#      # I needed to add in pip3 execable parameter. this did not work for ubuntu 16
+#      executable: pip3
+#      state: forcereinstall
+#      
+#  - name: Install latest version of flask python package
+#    pip:
+#      name: flask
+#      executable: pip3
+#      state: latest
